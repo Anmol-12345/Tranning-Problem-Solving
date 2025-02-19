@@ -1,0 +1,44 @@
+#include<iostream>
+#include<unordered_map>
+using namespace std;
+int solve(string str,int k,int n)
+{
+    unordered_map<char,int>freq;
+    for(char ch :str)
+    {
+        freq[ch]++;
+    }
+    while(k>0)
+    {
+    char maxchar = 'a';
+    int maxval = 0;
+    for(auto&i:freq)
+    {
+        if(i.second>maxval)
+        {
+            maxval = i.second;
+            maxchar = i.first;
+        }
+    }
+    if(maxval==0)
+    {
+        break;
+    }
+    freq[maxchar]--;
+    k--;
+}
+    int res=0;
+    for(auto&i:freq)
+    {
+        res = res+i.second*i.second;
+    }
+    return res;
+}
+int main()
+{
+    string str = "abccc";
+    int k = 1;
+    int n = str.size();
+    cout<<solve(str,k,n)<<endl;
+    return 0;
+}
